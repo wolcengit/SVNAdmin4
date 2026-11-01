@@ -1,0 +1,57 @@
+name: 缺陷报告
+description: 提交可复现的问题（安全问题请走 SECURITY.md 邮件渠道，勿在此披露）
+labels: ["bug"]
+body:
+  - type: markdown
+    value: |
+      提交前请确认：已阅读 [README](../../README.md)，且问题不属于安全漏洞
+      （安全漏洞请邮件至 wolcen@msn.com，详见 [SECURITY.md](../../SECURITY.md)）。
+  - type: input
+    id: version
+    attributes:
+      label: 版本 / commit
+      placeholder: v4.0.0 或 commit sha
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: 涉及模块
+      options:
+        - 仓库管理
+        - 权限 authz
+        - 用户 / 分组
+        - 备份 / 恢复
+        - 钩子
+        - 后台任务 / 定时任务
+        - 系统监控 / 设置
+        - 子管理员 / 登录
+        - 前端页面
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 请给出最小复现路径
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为与实际行为
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: 运行环境
+      description: OS / Go 版本 / Node 版本 / Subversion 版本 / 数据库（SQLite 或 MySQL）
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 相关日志
+      render: shell
