@@ -5,6 +5,15 @@
   "type": "module",
   "license": "GPL-3.0-or-later",
   "author": "wolcen@msn.com",
+  "homepage": "https://github.com/wolcengit/SVNAdmin4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolcengit/SVNAdmin4.git",
+    "directory": "web"
+  },
+  "bugs": {
+    "url": "https://github.com/wolcengit/SVNAdmin4/issues"
+  },
   "description": "SVNAdmin4 前端 —— 基于 Vue3 + TypeScript + Element Plus 的 SVN 管理系统",
   "scripts": {
     "dev": "vite",

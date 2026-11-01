@@ -54,5 +54,5 @@
 - 多仓库初始化模板的选择 UI（模板文件已就位，前端未暴露入口）。
 - 二次授权 `svn_second_pri` 的完整业务流程（数据表已建，Web 侧尚未闭环）。
 
-[Unreleased]: https://github.com/<your-org>/SVNAdmin4/compare/v4.0.0...HEAD
-[4.0.0]: https://github.com/<your-org>/SVNAdmin4/releases/tag/v4.0.0
+[Unreleased]: https://github.com/wolcengit/SVNAdmin4/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/wolcengit/SVNAdmin4/releases/tag/v4.0.0
