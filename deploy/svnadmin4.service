@@ -1,0 +1,15 @@
+[Unit]
+Description=SVNAdmin4 - Web Based Subversion Manager
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/svnadmin4/server
+ExecStart=/opt/svnadmin4/build/svnadmin4 -c /opt/svnadmin4/server/configs/config.yaml -web /opt/svnadmin4/web/dist
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target

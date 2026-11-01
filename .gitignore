@@ -1,0 +1,33 @@
+# 构建产物
+build/
+web/dist/
+web/node_modules/
+server/data/
+server/runtime/
+.tmp/
+.gocache/
+.ref/
+
+# 运行时数据（数据库 / 日志 / SVN 仓库）
+/data/
+/runtime/
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.log
+*.pid
+*.dump
+
+# 编辑器
+.idea/
+.vscode/
+*.swp
+
+# 本地助手/工具数据
+.workbuddy/
+
+# 系统
+.DS_Store
+Thumbs.db
+.Trash-*/

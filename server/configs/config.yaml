@@ -1,0 +1,83 @@
+# SVNAdmin4 服务配置
+
+server:
+  host: 0.0.0.0
+  port: 8080
+  mode: release          # debug | release | test
+  token_expire: 7200     # token 有效期（秒）
+
+database:
+  driver: sqlite         # sqlite | mysql
+  sqlite_path: ./data/svnadmin.db
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    user: root
+    password: ""
+    name: svnadmin
+
+svn:
+  # 数据主目录，其余路径均基于此目录自动推导
+  home_path: ./runtime/svnadmin/
+  # svn/svnadmin/svnlook 所在目录，留空则从 PATH 查找
+  bin_path: ""
+  # svn:// 检出地址使用的主机，留空则取请求 Host
+  svnserve_host: ""
+  svnserve_port: 3690
+  # HTTP 协议检出（需要 Apache + mod_dav_svn）
+  enable_http: false
+  http_host: ""
+  http_prefix: /svn
+
+security:
+  jwt_secret: svnadmin4-default-secret
+  enable_verify_code: true
+  login_fail_limit: 5          # 连续失败达阈值后锁定账号，0 表示不限制
+  login_lock_seconds: 300      # 锁定时长（秒）
+
+log:
+  level: info
+  save_file: false
+
+# 邮件服务（消息推送 / 定时任务通知）
+mail:
+  host: ""
+  port: 25
+  encryption: none             # none | SSL | TLS
+  auto_tls: false
+  auth: true
+  user: ""
+  pass: ""
+  from: ""
+  to: ""                       # 多个收件人用逗号分隔
+  timeout: 5
+  status: false                # 总开关
+
+# LDAP 对接（用户 / 分组来源切到 ldap 时使用）
+ldap:
+  host: ""                     # ldap:// 或 ldaps://，不带端口
+  port: 389
+  version: 3
+  bind_dn: ""
+  bind_password: ""
+  user_base_dn: ""
+  user_search_filter: ""       # 默认 (objectClass=inetOrgPerson)
+  user_attributes: uid
+  group_base_dn: ""
+  group_search_filter: ""      # 默认 (objectClass=groupOfNames)
+  group_attributes: cn
+  groups_to_user_attribute: member
+  groups_to_user_attribute_value: ""
+
+# Apache / HTTP 协议检出
+apache:
+  conf_path: /etc/httpd/conf.d/subversion.conf
+  bin_path: ""                 # 留空则自动探测 httpd / apache2
+  modules_dir: ""              # 留空则自动探测
+  port: 80
+
+# 版本更新检测
+update:
+  enable: false
+  server:
+    - https://api.github.com/repos/witersen/SvnAdminV2.0/releases/latest
