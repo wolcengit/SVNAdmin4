@@ -33,7 +33,7 @@ jobs:
       - name: 推导版本元数据
         id: meta
         run: |
-          echo "version=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
           echo "commit=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
           echo "built=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
       - name: 编译
@@ -82,6 +82,8 @@ jobs:
         run: |
           echo "BUILT=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
           echo "COMMIT=${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+          RAW_VERSION="${{ github.ref_name }}"
+          echo "VERSION=${RAW_VERSION#v}" >> "$GITHUB_ENV"
       - name: 构建并推送
         uses: docker/build-push-action@v6
         with:
@@ -91,7 +93,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            VERSION=${{ github.ref_name }}
+            VERSION=${{ env.VERSION }}
             COMMIT=${{ env.COMMIT }}
             BUILD_TIME=${{ env.BUILT }}
 
