@@ -108,13 +108,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: artifacts
-          merge-multiple: true
       - name: 生成校验和
-        run: cd artifacts && sha256sum *.tar.gz > checksums.txt
+        run: |
+          mkdir -p upload
+          find artifacts -type f -name '*.tar.gz' -exec cp {} upload/ \;
+          cd upload && sha256sum *.tar.gz > checksums.txt
+          ls -l
       - name: 发布
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/*.tar.gz
-            artifacts/checksums.txt
+            upload/*.tar.gz
+            upload/checksums.txt
           generate_release_notes: true
