@@ -98,15 +98,15 @@ type LDAPConfig struct {
 	BindDN       string `yaml:"bind_dn"`
 	BindPassword string `yaml:"bind_password"`
 	// 用户查询
-	UserBaseDN        string `yaml:"user_base_dn"`
-	UserSearchFilter  string `yaml:"user_search_filter"`
-	UserAttributes    string `yaml:"user_attributes"`
+	UserBaseDN       string `yaml:"user_base_dn"`
+	UserSearchFilter string `yaml:"user_search_filter"`
+	UserAttributes   string `yaml:"user_attributes"`
 	// 分组查询
-	GroupBaseDN        string `yaml:"group_base_dn"`
-	GroupSearchFilter  string `yaml:"group_search_filter"`
-	GroupAttributes    string `yaml:"group_attributes"`
-	GroupsToUserAttr   string `yaml:"groups_to_user_attribute"`
-	GroupsToUserValue  string `yaml:"groups_to_user_attribute_value"`
+	GroupBaseDN       string `yaml:"group_base_dn"`
+	GroupSearchFilter string `yaml:"group_search_filter"`
+	GroupAttributes   string `yaml:"group_attributes"`
+	GroupsToUserAttr  string `yaml:"groups_to_user_attribute"`
+	GroupsToUserValue string `yaml:"groups_to_user_attribute_value"`
 }
 
 // ApacheConfig Apache / HTTP 协议配置

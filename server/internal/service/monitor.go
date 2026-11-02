@@ -48,12 +48,12 @@ type LoadInfo struct {
 
 // CPUInfo CPU 使用率与硬件信息
 type CPUInfo struct {
-	Percent     float64  `json:"percent"`
-	Color       string   `json:"color"`
-	Models      []string `json:"cpu"`
-	Physical    int      `json:"cpuPhysical"`
-	Core        int      `json:"cpuCore"`
-	Processor   int      `json:"cpuProcessor"`
+	Percent   float64  `json:"percent"`
+	Color     string   `json:"color"`
+	Models    []string `json:"cpu"`
+	Physical  int      `json:"cpuPhysical"`
+	Core      int      `json:"cpuCore"`
+	Processor int      `json:"cpuProcessor"`
 }
 
 // MemInfo 内存使用（MB）
@@ -78,11 +78,11 @@ type DiskInfo struct {
 
 // MonitorInfo 监控总览
 type MonitorInfo struct {
-	Load  LoadInfo  `json:"load"`
-	CPU   CPUInfo   `json:"cpu"`
-	Mem   MemInfo   `json:"mem"`
-	Disk  []DiskInfo `json:"disk"`
-	Host  HostInfo  `json:"host"`
+	Load LoadInfo   `json:"load"`
+	CPU  CPUInfo    `json:"cpu"`
+	Mem  MemInfo    `json:"mem"`
+	Disk []DiskInfo `json:"disk"`
+	Host HostInfo   `json:"host"`
 }
 
 // HostInfo 主机基本信息

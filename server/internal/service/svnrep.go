@@ -126,15 +126,15 @@ func RepList(page, pageSize int, keyword, sortName, sortType string) (int64, []m
 	}
 	var list []model.SvnRep
 	order := orderClause(sortName, sortType, map[string]string{
-		"rep_id":    "rep_id",
-		"repId":     "rep_id",
-		"rep_name":  "rep_name",
-		"repName":   "rep_name",
-		"rep_size":  "rep_size",
-		"repSize":   "rep_size",
-		"rep_rev":   "rep_rev",
-		"repRev":    "rep_rev",
-		"rep_note":  "rep_note",
+		"rep_id":   "rep_id",
+		"repId":    "rep_id",
+		"rep_name": "rep_name",
+		"repName":  "rep_name",
+		"rep_size": "rep_size",
+		"repSize":  "rep_size",
+		"rep_rev":  "rep_rev",
+		"repRev":   "rep_rev",
+		"rep_note": "rep_note",
 	}, "rep_id DESC")
 	if err := q.Order(order).Offset((page - 1) * pageSize).Limit(pageSize).Find(&list).Error; err != nil {
 		return 0, nil, err

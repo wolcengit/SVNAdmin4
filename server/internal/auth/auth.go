@@ -19,9 +19,9 @@ import (
 
 // 角色定义
 const (
-	RoleAdmin   = "admin"
+	RoleAdmin    = "admin"
 	RoleSubadmin = "subadmin"
-	RoleSvnUser = "svnuser"
+	RoleSvnUser  = "svnuser"
 )
 
 // User 登录用户上下文
@@ -41,9 +41,9 @@ func (u *User) CanManage() bool {
 }
 
 type claims struct {
-	UID   int64  `json:"uid"`
-	Name  string `json:"uname"`
-	Role  string `json:"role"`
+	UID  int64  `json:"uid"`
+	Name string `json:"uname"`
+	Role string `json:"role"`
 	jwt.RegisteredClaims
 }
 
@@ -52,9 +52,9 @@ func Generate(u *User) (string, error) {
 	now := time.Now()
 	exp := now.Add(time.Duration(config.C().Server.TokenExpire) * time.Second)
 	c := claims{
-		UID:   u.ID,
-		Name:  u.Name,
-		Role:  u.Role,
+		UID:  u.ID,
+		Name: u.Name,
+		Role: u.Role,
 		RegisteredClaims: jwt.RegisteredClaims{
 			Issuer:    "svnadmin",
 			Subject:   u.Name,

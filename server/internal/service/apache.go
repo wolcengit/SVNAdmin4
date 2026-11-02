@@ -37,20 +37,20 @@ type ApacheInfo struct {
 	Prefix       string   `json:"prefix"`
 	Warnings     []string `json:"warnings"`
 	// 数据源信息（对齐原版 GetApacheInfo 字段）
-	UserSource   string    `json:"userSource"`
-	GroupSource  string    `json:"groupSource"`
-	PasswordDB   bool      `json:"passwordDb"`
-	LDAP         LDAPInfo  `json:"ldap"`
+	UserSource  string   `json:"userSource"`
+	GroupSource string   `json:"groupSource"`
+	PasswordDB  bool     `json:"passwordDb"`
+	LDAP        LDAPInfo `json:"ldap"`
 }
 
 // LDAPInfo LDAP 配置摘要（脱敏：不含 bind 密码）
 type LDAPInfo struct {
-	Host           string `json:"host"`
-	Port           int    `json:"port"`
-	Version        int    `json:"version"`
-	BindDN         string `json:"bindDn"`
-	UserBaseDN     string `json:"userBaseDn"`
-	GroupBaseDN    string `json:"groupBaseDn"`
+	Host        string `json:"host"`
+	Port        int    `json:"port"`
+	Version     int    `json:"version"`
+	BindDN      string `json:"bindDn"`
+	UserBaseDN  string `json:"userBaseDn"`
+	GroupBaseDN string `json:"groupBaseDn"`
 }
 
 // GetApacheInfo 探测 Apache 与 mod_dav_svn 安装情况
@@ -58,12 +58,12 @@ func GetApacheInfo() ApacheInfo {
 	cfg := config.C()
 	ds := GetDataSource(OptionHttpDatasource)
 	info := ApacheInfo{
-		ConfPath:   cfg.Apache.ConfPath,
-		Port:       cfg.Apache.Port,
-		Prefix:     cfg.SVN.HTTPPrefix,
-		UserSource: ds.UserSource,
+		ConfPath:    cfg.Apache.ConfPath,
+		Port:        cfg.Apache.Port,
+		Prefix:      cfg.SVN.HTTPPrefix,
+		UserSource:  ds.UserSource,
 		GroupSource: ds.GroupSource,
-		PasswordDB: ds.UserSource == SourceHTTPPasswd,
+		PasswordDB:  ds.UserSource == SourceHTTPPasswd,
 		LDAP: LDAPInfo{
 			Host:        ds.LDAP.Host,
 			Port:        ds.LDAP.Port,

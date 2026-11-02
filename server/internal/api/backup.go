@@ -163,8 +163,8 @@ func BackupUploadPart(c *gin.Context) {
 // BackupUploadMerge 合并分片
 func BackupUploadMerge(c *gin.Context) {
 	var req struct {
-		UploadId       string `json:"uploadId"`
-		DeleteOnMerge  bool   `json:"deleteOnMerge"`
+		UploadId      string `json:"uploadId"`
+		DeleteOnMerge bool   `json:"deleteOnMerge"`
 	}
 	if err := c.ShouldBindJSON(&req); err != nil {
 		fail(c, err)

@@ -254,6 +254,7 @@ func SecondPriObjectOwner(id int64) (string, error) {
 // 完整链路校验（对齐原版二次授权的自助语义）：
 //  1. 该用户在该路径开启了二次授权；
 //  2. 目标对象在白名单中（且不得是自身）。
+//
 // 管理员/子管理员调用时直接放行。
 func SecondPriDelegatable(owner, repName, path, objectName string) error {
 	if objectName == owner {

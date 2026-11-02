@@ -60,12 +60,12 @@ func UserList(page, pageSize int, keyword string, status int, sortName, sortType
 	}
 	var list []model.SvnUser
 	order := orderClause(sortName, sortType, map[string]string{
-		"svn_user_id":        "svn_user_id",
-		"svnUserId":          "svn_user_id",
-		"svn_user_name":      "svn_user_name",
-		"svnUserName":        "svn_user_name",
-		"svn_user_status":    "svn_user_status",
-		"svnUserStatus":      "svn_user_status",
+		"svn_user_id":         "svn_user_id",
+		"svnUserId":           "svn_user_id",
+		"svn_user_name":       "svn_user_name",
+		"svnUserName":         "svn_user_name",
+		"svn_user_status":     "svn_user_status",
+		"svnUserStatus":       "svn_user_status",
 		"svn_user_last_login": "svn_user_last_login",
 	}, "svn_user_id DESC")
 	if err := q.Order(order).Offset((page - 1) * pageSize).Limit(pageSize).Find(&list).Error; err != nil {

@@ -649,8 +649,8 @@ func ClearStaleTasks() int {
 			msg = "服务重启，排队任务已取消"
 		}
 		store.DB().Model(&model.Task{}).Where("task_id = ?", t.TaskID).Updates(map[string]interface{}{
-			"task_status":     TaskStatusCancel,
-			"task_message":    msg,
+			"task_status":      TaskStatusCancel,
+			"task_message":     msg,
 			"task_update_time": now,
 		})
 	}

@@ -54,14 +54,14 @@ func (Subadmin) TableName() string { return "subadmin" }
 
 // SvnUser SVN 用户
 type SvnUser struct {
-	SvnUserID       int64  `gorm:"primaryKey;autoIncrement;column:svn_user_id" json:"svnUserId"`
-	SvnUserName     string `gorm:"size:200;not null;uniqueIndex;column:svn_user_name" json:"svnUserName"`
-	SvnUserPass     string `gorm:"size:200;not null;column:svn_user_pass" json:"-"`
-	SvnUserStatus   int    `gorm:"not null;default:1;column:svn_user_status" json:"svnUserStatus"`
-	SvnUserNote     string `gorm:"size:1000;column:svn_user_note" json:"svnUserNote"`
+	SvnUserID        int64  `gorm:"primaryKey;autoIncrement;column:svn_user_id" json:"svnUserId"`
+	SvnUserName      string `gorm:"size:200;not null;uniqueIndex;column:svn_user_name" json:"svnUserName"`
+	SvnUserPass      string `gorm:"size:200;not null;column:svn_user_pass" json:"-"`
+	SvnUserStatus    int    `gorm:"not null;default:1;column:svn_user_status" json:"svnUserStatus"`
+	SvnUserNote      string `gorm:"size:1000;column:svn_user_note" json:"svnUserNote"`
 	SvnUserLastLogin string `gorm:"size:45;column:svn_user_last_login" json:"svnUserLastLogin"`
-	SvnUserToken    string `gorm:"size:255;column:svn_user_token" json:"-"`
-	SvnUserMail     string `gorm:"size:128;column:svn_user_mail" json:"svnUserMail"`
+	SvnUserToken     string `gorm:"size:255;column:svn_user_token" json:"-"`
+	SvnUserMail      string `gorm:"size:128;column:svn_user_mail" json:"svnUserMail"`
 	// Online 在线态（登录 token 未过期即在线；svn_user_token 存到期 Unix 秒）
 	Online bool `gorm:"-" json:"online"`
 }
@@ -98,16 +98,16 @@ func (SvnRep) TableName() string { return "svn_reps" }
 //   - 开关记录：objectType 与 objectName 均为空，SecondPri=1 表示开启
 //   - 白名单记录：objectType/objectName 指定可被下放的对象
 type SvnSecondPri struct {
-	SvnSecondPriID     int64  `gorm:"primaryKey;autoIncrement;column:svn_second_pri_id" json:"svnSecondPriId"`
-	SvnUserPriPathID   int64  `gorm:"not null;default:0;column:svnn_user_pri_path_id" json:"svnUserPriPathId"`
-	SvnObjectType      string `gorm:"size:20;column:svn_object_type" json:"svnObjectType"`
-	SvnObjectName      string `gorm:"size:200;column:svn_object_name" json:"svnObjectName"`
-	SecondPriOwner     string `gorm:"size:200;not null;column:second_pri_owner" json:"secondPriOwner"`
-	SecondPriPath      string `gorm:"size:1000;not null;column:second_pri_path" json:"secondPriPath"`
-	SecondPriRepName   string `gorm:"size:1000;not null;column:second_pri_rep_name" json:"secondPriRepName"`
-	SecondPri          string `gorm:"size:10;not null;default:0;column:second_pri" json:"secondPri"`
-	SecondPriUnique    string `gorm:"size:64;not null;index;column:second_pri_unique" json:"secondPriUnique"`
-	SecondPriAddTime   string `gorm:"size:45;column:second_pri_add_time" json:"secondPriAddTime"`
+	SvnSecondPriID   int64  `gorm:"primaryKey;autoIncrement;column:svn_second_pri_id" json:"svnSecondPriId"`
+	SvnUserPriPathID int64  `gorm:"not null;default:0;column:svnn_user_pri_path_id" json:"svnUserPriPathId"`
+	SvnObjectType    string `gorm:"size:20;column:svn_object_type" json:"svnObjectType"`
+	SvnObjectName    string `gorm:"size:200;column:svn_object_name" json:"svnObjectName"`
+	SecondPriOwner   string `gorm:"size:200;not null;column:second_pri_owner" json:"secondPriOwner"`
+	SecondPriPath    string `gorm:"size:1000;not null;column:second_pri_path" json:"secondPriPath"`
+	SecondPriRepName string `gorm:"size:1000;not null;column:second_pri_rep_name" json:"secondPriRepName"`
+	SecondPri        string `gorm:"size:10;not null;default:0;column:second_pri" json:"secondPri"`
+	SecondPriUnique  string `gorm:"size:64;not null;index;column:second_pri_unique" json:"secondPriUnique"`
+	SecondPriAddTime string `gorm:"size:45;column:second_pri_add_time" json:"secondPriAddTime"`
 }
 
 func (SvnSecondPri) TableName() string { return "svn_second_pri" }
@@ -118,11 +118,11 @@ func (SvnSecondPri) TableName() string { return "svn_second_pri" }
 
 // Log 操作日志
 type Log struct {
-	LogID         int64  `gorm:"primaryKey;autoIncrement;column:log_id" json:"logId"`
-	LogTypeName   string `gorm:"size:200;not null;column:log_type_name" json:"logTypeName"`
-	LogContent    string `gorm:"size:5000;column:log_content" json:"logContent"`
+	LogID          int64  `gorm:"primaryKey;autoIncrement;column:log_id" json:"logId"`
+	LogTypeName    string `gorm:"size:200;not null;column:log_type_name" json:"logTypeName"`
+	LogContent     string `gorm:"size:5000;column:log_content" json:"logContent"`
 	LogAddUserName string `gorm:"size:200;not null;column:log_add_user_name" json:"logAddUserName"`
-	LogAddTime    string `gorm:"size:45;not null;column:log_add_time" json:"logAddTime"`
+	LogAddTime     string `gorm:"size:45;not null;column:log_add_time" json:"logAddTime"`
 }
 
 func (Log) TableName() string { return "logs" }
@@ -165,24 +165,24 @@ func (Task) TableName() string { return "tasks" }
 
 // Crond 定时任务
 type Crond struct {
-	CrondID       int64  `gorm:"primaryKey;autoIncrement;column:crond_id" json:"crondId"`
-	Sign          string `gorm:"size:64;not null;column:sign" json:"sign"`
-	TaskType      int    `gorm:"not null;column:task_type" json:"taskType"`
-	TaskName      string `gorm:"size:200;not null;column:task_name" json:"taskName"`
-	CycleType     string `gorm:"size:20;not null;column:cycle_type" json:"cycleType"`
-	CycleDesc     string `gorm:"size:200;not null;column:cycle_desc" json:"cycleDesc"`
-	Status        int    `gorm:"not null;column:status" json:"status"`
-	SaveCount     int    `gorm:"not null;column:save_count" json:"saveCount"`
-	RepName       string `gorm:"size:200;column:rep_name" json:"repName"`
-	Week          int    `gorm:"column:week" json:"week"`
-	Day           int    `gorm:"column:day" json:"day"`
-	Hour          int    `gorm:"column:hour" json:"hour"`
-	Minute        int    `gorm:"column:minute" json:"minute"`
-	Notice        int    `gorm:"not null;column:notice" json:"notice"`
-	Code          string `gorm:"type:text;not null;column:code" json:"code"`
-	Shell         string `gorm:"type:text;column:shell" json:"shell"`
-	LastExecTime  string `gorm:"size:45;not null;column:last_exec_time" json:"lastExecTime"`
-	CreateTime    string `gorm:"size:45;not null;column:create_time" json:"createTime"`
+	CrondID      int64  `gorm:"primaryKey;autoIncrement;column:crond_id" json:"crondId"`
+	Sign         string `gorm:"size:64;not null;column:sign" json:"sign"`
+	TaskType     int    `gorm:"not null;column:task_type" json:"taskType"`
+	TaskName     string `gorm:"size:200;not null;column:task_name" json:"taskName"`
+	CycleType    string `gorm:"size:20;not null;column:cycle_type" json:"cycleType"`
+	CycleDesc    string `gorm:"size:200;not null;column:cycle_desc" json:"cycleDesc"`
+	Status       int    `gorm:"not null;column:status" json:"status"`
+	SaveCount    int    `gorm:"not null;column:save_count" json:"saveCount"`
+	RepName      string `gorm:"size:200;column:rep_name" json:"repName"`
+	Week         int    `gorm:"column:week" json:"week"`
+	Day          int    `gorm:"column:day" json:"day"`
+	Hour         int    `gorm:"column:hour" json:"hour"`
+	Minute       int    `gorm:"column:minute" json:"minute"`
+	Notice       int    `gorm:"not null;column:notice" json:"notice"`
+	Code         string `gorm:"type:text;not null;column:code" json:"code"`
+	Shell        string `gorm:"type:text;column:shell" json:"shell"`
+	LastExecTime string `gorm:"size:45;not null;column:last_exec_time" json:"lastExecTime"`
+	CreateTime   string `gorm:"size:45;not null;column:create_time" json:"createTime"`
 }
 
 func (Crond) TableName() string { return "crond" }
