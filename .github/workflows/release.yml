@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write   # 创建 Release
   packages: write   # 推送 GHCR 镜像
+  actions: read     # 下载其它 job 上传的构建产物
 
 env:
   REGISTRY: ghcr.io
