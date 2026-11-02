@@ -8,6 +8,20 @@
 
 待合并的改动记录在 PR 中，合并时归入下一版本。
 
+## [4.1.0] - 2026-11-02
+
+### 新增
+
+- **产品版本信息（SSOT）**：新增 `server/internal/version` 作为唯一版本源；`svnadmin4 -v`
+  输出单行版本（版本号 / Git 提交 / 构建时间 / Go 运行时 / 许可证）；`/api/common/version`
+  与 `/api/setting/version` 返回结构化版本信息（版本号、Git 提交、构建时间、Go 运行时、
+  平台、Subversion 版本、许可证与仓库地址）。
+- **构建与发布流水线**：Makefile 通过 `-ldflags` 注入版本 / 提交 / 构建时间，新增
+  `make version-check` 一致性门禁；Docker 镜像附带 OCI 标签与 `/opt/svnadmin4/VERSION`
+  文件；新增 `.github/workflows/release.yml`，打 `v*` 标签时自动构建 `linux/amd64 + arm64`
+  二进制与多架构镜像并推送至 GHCR（`ghcr.io/wolcengit/svnadmin4`）。
+- **关于页增强**：展示 Git 提交短哈希、构建时间、许可证（指向 GPL-3.0 全文）与项目仓库地址。
+
 ## [4.0.0] - 2026-11-01
 
 参考 [witersen/SvnAdminV2.0](https://github.com/witersen/SvnAdminV2.0) 的功能设计，
@@ -54,5 +68,6 @@
 - 多仓库初始化模板的选择 UI（模板文件已就位，前端未暴露入口）。
 - 二次授权 `svn_second_pri` 的完整业务流程（数据表已建，Web 侧尚未闭环）。
 
-[Unreleased]: https://github.com/wolcengit/SVNAdmin4/compare/v4.0.0...HEAD
+[Unreleased]: https://github.com/wolcengit/SVNAdmin4/compare/v4.1.0...HEAD
+[4.1.0]: https://github.com/wolcengit/SVNAdmin4/releases/tag/v4.1.0
 [4.0.0]: https://github.com/wolcengit/SVNAdmin4/releases/tag/v4.0.0

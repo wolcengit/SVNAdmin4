@@ -6,6 +6,7 @@
 ![Go](https://img.shields.io/badge/Go-1.22%2B-00ADD8)
 ![Vue](https://img.shields.io/badge/Vue-3-42b883)
 ![SVN](https://img.shields.io/badge/Subversion-1.8%2B-8099cf)
+![Version](https://img.shields.io/badge/version-4.1.0-blue)
 
 基于 Web 的 Subversion 服务端管理系统，参考 [witersen/SvnAdminV2.0](https://github.com/witersen/SvnAdminV2.0) 的功能设计，使用 **Golang + Vue3** 重新实现。
 
