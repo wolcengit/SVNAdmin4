@@ -443,15 +443,29 @@
             <el-descriptions-item label="当前版本">
               <el-tag type="success" size="small">v{{ version.version || '-' }}</el-tag>
             </el-descriptions-item>
+            <el-descriptions-item label="Git 提交">{{ version.gitCommit || '-' }}</el-descriptions-item>
+            <el-descriptions-item label="构建时间" :span="2">{{ version.buildTime || '-' }}</el-descriptions-item>
             <el-descriptions-item label="Subversion">{{ version.svnVersion || '-' }}</el-descriptions-item>
             <el-descriptions-item label="Go 运行时">{{ version.goVersion || '-' }}</el-descriptions-item>
             <el-descriptions-item label="运行平台">{{ version.platform || '-' }}</el-descriptions-item>
-            <el-descriptions-item label="参考项目" :span="2">
+            <el-descriptions-item label="许可证">
+              <el-link :href="version.licenseUrl" target="_blank" type="primary">
+                {{ version.license || 'GPL-3.0-or-later' }}
+              </el-link>
+            </el-descriptions-item>
+            <el-descriptions-item label="项目仓库" :span="2">
               <el-link :href="version.repository" target="_blank" type="primary">
                 {{ version.repository }}
               </el-link>
             </el-descriptions-item>
           </el-descriptions>
+          <el-alert
+            :closable="false"
+            type="info"
+            show-icon
+            style="margin-top: 12px"
+            title="本产品参考 witersen/SvnAdminV2.0 的功能设计重写，遵循 GPL-3.0-or-later 开源许可。"
+          />
           <div style="margin-top: 12px">
             <el-button type="primary" :loading="checking" @click="checkUpdate">检测更新</el-button>
           </div>

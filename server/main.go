@@ -22,11 +22,7 @@ import (
 	"svnadmin/internal/router"
 	"svnadmin/internal/service"
 	"svnadmin/internal/store"
-)
-
-var (
-	version   = "4.0.0"
-	buildTime = "dev"
+	"svnadmin/internal/version"
 )
 
 func main() {
@@ -36,7 +32,7 @@ func main() {
 	flag.Parse()
 
 	if *showVer {
-		fmt.Printf("SVNAdmin4 %s (build %s)\n", version, buildTime)
+		fmt.Println(version.Short())
 		return
 	}
 
@@ -97,7 +93,7 @@ func main() {
 	}
 
 	go func() {
-		log.Printf("SVNAdmin4 %s 启动成功，监听 %s", version, addr)
+		log.Printf("%s 启动成功，监听 %s", version.Short(), addr)
 		log.Printf("数据目录: %s", cfg.SVN.HomePath)
 		log.Printf("Subversion: %s", service.VersionText())
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {

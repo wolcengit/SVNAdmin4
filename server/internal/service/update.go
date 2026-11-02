@@ -11,17 +11,14 @@ package service
 import (
 	"encoding/json"
 	"net/http"
-	"runtime"
 	"sort"
 	"strings"
 	"time"
 
 	"golang.org/x/mod/semver"
 	"svnadmin/internal/config"
+	"svnadmin/internal/version"
 )
-
-// 当前版本
-const CurrentVersion = "4.0.0"
 
 // UpdateInfo 版本更新信息
 type UpdateInfo struct {
@@ -56,7 +53,7 @@ type githubRelease struct {
 
 // CheckUpdate 检测版本更新
 func CheckUpdate() (*UpdateInfo, error) {
-	info := &UpdateInfo{Checked: true, Current: CurrentVersion}
+	info := &UpdateInfo{Checked: true, Current: version.Version}
 	servers := configUpdateServers()
 	if len(servers) == 0 {
 		info.Message = "未配置更新检测服务器"
@@ -70,7 +67,7 @@ func CheckUpdate() (*UpdateInfo, error) {
 			lastErr = err
 			continue
 		}
-		req.Header.Set("User-Agent", "SVNAdmin4/"+CurrentVersion)
+		req.Header.Set("User-Agent", "SVNAdmin4/"+version.Version)
 		req.Header.Set("Accept", "application/vnd.github+json")
 		resp, err := client.Do(req)
 		if err != nil {
@@ -116,7 +113,7 @@ func fillUpdateInfo(info *UpdateInfo, rel *githubRelease) {
 	info.Body = rel.Body
 	info.PublishedAt = rel.PublishedAt
 	info.URL = rel.HTMLURL
-	info.HasUpdate = versionGreater(latest, CurrentVersion)
+	info.HasUpdate = versionGreater(latest, version.Version)
 	// 从 Release 说明中解析 "修复 / 新增 / 移除" 三个区块
 	info.Fixed = parseSection(rel.Body, "修复", "fix", "bug")
 	info.Added = parseSection(rel.Body, "新增", "add", "feat")
@@ -220,13 +217,16 @@ func digitsOnly(s string) string {
 	return b.String()
 }
 
-// VersionInfo 版本信息
-func VersionInfo() map[string]interface{} {
-	return map[string]interface{}{
-		"version":    CurrentVersion,
-		"svnVersion": VersionText(),
-		"goVersion":  runtime.Version(),
-		"platform":   runtime.GOOS + "/" + runtime.GOARCH,
-		"repository": "https://github.com/witersen/SvnAdminV2.0",
-	}
+// VersionResp 版本信息（含运行环境），供 /api/common/version 与 /api/setting/version 透出。
+// 不含上游参考项目字段；上游致谢见 README / NOTICE。
+type VersionResp struct {
+	version.Info
+	SvnVersion string `json:"svnVersion"`
+}
+
+// VersionInfo 返回结构化版本信息。
+func VersionInfo() VersionResp {
+	vi := VersionResp{Info: version.Get()}
+	vi.SvnVersion = VersionText()
+	return vi
 }
